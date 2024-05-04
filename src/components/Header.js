@@ -20,7 +20,7 @@ const Header = () => {
       {/* hambuger menu logo */}
       <img  
       onClick = {()=>toggleMenuHandler()}
-      className=' h-9 mx-5 ' 
+      className=' h-9 mx-5 cursor-pointer ' 
       src={hamburger} 
       alt="Hamburger Menu" 
 
