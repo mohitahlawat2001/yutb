@@ -26,6 +26,7 @@ const Header = () => {
 
       />
       {/* YouTube logo */}
+      
       <img  className=' h-9 mx-2 px-5'  src={youtubeLogo} alt="YouTube Logo" />
       </div>
 
