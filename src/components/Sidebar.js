@@ -12,7 +12,7 @@ const Sidebar = () => {
   }
 
   return (
-    <div className=' px-5 shadow-lg w-48' >
+    <div className='px-5 shadow-lg w-48' >
       <Link to='/'>
       <h1 className='font-bold' >Home</h1>
       </Link>
