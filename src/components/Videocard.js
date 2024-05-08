@@ -1,7 +1,7 @@
 import React from 'react'
 
 const Videocard = ({info}) => {
-  console.log(info);
+  // console.log(info);
   
   const {snippet, statistics} = info;
   const {title, channelTitle, thumbnails} = snippet;
@@ -18,5 +18,18 @@ const Videocard = ({info}) => {
     </div>
   )
 }
+
+export const AdVideoCard = ({info})=>{
+  return (
+    <div className='p-1 m-1 border border-red-500 ' >
+      {/* top left show this is an ad */}
+      <p className='text-xs text-red-500' >Ad</p>
+      
+      <Videocard info={info}/>
+    </div>
+  )
+}
+
+
 
 export default Videocard;
