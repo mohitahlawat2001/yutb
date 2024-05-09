@@ -3,25 +3,35 @@ import hamburger from '../assets/hamburger.png'
 import userIcon from '../assets/usericon.png'
 import youtubeLogo from '../assets/youtube.png'
 import searchlogo from '../assets/search.png'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { toggleMenu } from '../utils/appSlice';
 import { YOUTUBE_SEARCH_API } from '../utils/constants';
+import { cacheResults } from '../utils/searchSlice'
+
+
 const Header = () => {
 
   const [searchQuery, setSearchQuery] = useState('');
   const [Suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
-
+  const searchCache = useSelector(state => state.search);
   // console.log(searchQuery);
+
+  
 
   useEffect(() => {
 
     const timer = setTimeout(() => {
-      searchSuggestions(searchQuery);
+      if (searchCache[searchQuery]) {
+        setSuggestions(searchCache[searchQuery]);
+      }else{
+        searchSuggestions(searchQuery);
+      }
     }, 500);
 
     return () => clearTimeout(timer);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchQuery]);
 
   
@@ -32,6 +42,7 @@ const Header = () => {
       const data = await response.json();
       // console.log(data[1]);
       setSuggestions(data[1]);
+      setSearchCache(query, data[1]);
     } catch (error) {
       console.log(error);
     }
@@ -42,6 +53,10 @@ const Header = () => {
 
   const toggleMenuHandler = () =>{
     dispatch(toggleMenu());
+  }
+
+  const setSearchCache = (query, suggestions) => {
+    dispatch(cacheResults({[query]: suggestions}));
   }
   return (
     <div className='grid grid-flow-col p-5 m-2 shadow'>
